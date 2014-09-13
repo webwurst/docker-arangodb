@@ -1,19 +1,16 @@
-from webwurst/ubuntu
-run apt-get update
-
-# add repository
-run curl http://www.arangodb.org/repositories/arangodb2/xUbuntu_14.04/Release.key | apt-key add -
-add arangodb.list /etc/apt/sources.list.d/
-run apt-get update
+from ubuntu:14.04
 
 # arangodb
-run apt-get -y install arangodb
-add arangodb-start /usr/local/bin/
+run apt-get update && apt-get install -y curl \
+  && curl http://www.arangodb.org/repositories/arangodb2/xUbuntu_14.04/Release.key | apt-key add - \
+  && echo "deb http://www.arangodb.org/repositories/arangodb2/xUbuntu_14.04/ /" > /etc/apt/sources.list.d/arangodb.list \
+  && apt-get update && apt-get install -y arangodb
 
 # config
+add arangod.conf.env /etc/arangodb/
 add arangod.conf /etc/arangodb/
-add arangod-development.conf /etc/arangodb/
+add arangodb_run /usr/local/bin/
 
-cmd /usr/local/bin/arangodb-start
 # volume ["/var/lib/arangodb/databases", "/var/lib/arangodb/apps"]
+cmd ["arangodb_run"]
 expose 8529

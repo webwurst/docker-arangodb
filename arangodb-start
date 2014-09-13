@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-exec /usr/sbin/arangod \
-	--pid-file /var/run/arangodb/arangod.pid \
-	--temp-path /var/tmp/arangod \
-	--log.file - \
-  -c /etc/arangodb/arangod-development.conf

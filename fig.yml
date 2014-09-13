@@ -1,7 +1,9 @@
 arangodb:
   build: .
+  environment:
+    DEVELOPMENT: true
   ports:
-   - "8529:8529"
+    - "8529:8529"
   volumes:
-   - ${HOME}/.docker_volumes/${VOLUMES}/databases:/var/lib/arangodb/databases
-   - ${HOME}/.docker_volumes/${VOLUMES}/apps:/var/lib/arangodb/apps
+    - docker_volumes/databases:/var/lib/arangodb/databases
+    - docker_volumes/apps:/var/lib/arangodb/apps

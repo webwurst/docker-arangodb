@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#export DEVELOPMENT=${DEVELOPMENT:=false}
+#envconf /etc/arangodb/arangod.conf
+
+exec /usr/sbin/arangod \
+	--temp-path /var/tmp/arangod \
+	--log.file - \
+  -c /etc/arangodb/arangod.conf
